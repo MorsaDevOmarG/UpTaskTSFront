@@ -24,7 +24,11 @@ export default function CreateProjectView() {
   // const mutation = useMutation({
   const { mutate } = useMutation({
     mutationFn: createProject,
-    onError: () => {},
+    onError: (error) => {
+      // console.log('Desde ONERROR');
+      // console.log(error.message);
+      toast.error(error.message);
+    },
     onSuccess: (data) => {
       toast.success(data);
 
