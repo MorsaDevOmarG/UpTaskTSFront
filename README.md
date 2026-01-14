@@ -79,5 +79,12 @@
   - **_npm i react-hook-form_**
 - ZOD
   - **_npm i zod_**
+- AXIOS
+  - **_npm i axios_**
+  - Se crea la carpeta:
+    - **lib**
+  - Se genera el archivo:
+    - _axios.ts_
+  - Dentro de él se realiza la configuración para apuntar a la _URL_ de la _API_.
 - React Query
   -

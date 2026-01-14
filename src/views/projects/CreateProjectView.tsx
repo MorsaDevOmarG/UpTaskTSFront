@@ -16,7 +16,7 @@ export default function CreateProjectView() {
     formState: { errors },
   } = useForm({ defaultValues: { initialValues } });
 
-  const handleForm = (data) => {
+  const handleForm = (data : ProjectFormData) => {
     console.log(data);
   };
 
