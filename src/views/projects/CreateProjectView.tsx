@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import type { ProjectFormData } from '@/types/index';
 import { createProject } from "@/api/ProjectAPI";
+import { toast } from "react-toastify";
 
 export default function CreateProjectView() {
   const navigate = useNavigate();
@@ -19,10 +20,13 @@ export default function CreateProjectView() {
     formState: { errors },
   } = useForm({ defaultValues: { initialValues } });
 
-  const handleForm = async (data : ProjectFormData) => {
+  const handleForm = async (formData : ProjectFormData) => {
     // console.log(data);
     // De esta forma se pasarán los datos a ese archivo
-    await createProject(data);
+    // await createProject(data);
+    const data = await createProject(formData);
+
+    toast.success(data);
     
     // Es para redireccionar
     navigate('/');

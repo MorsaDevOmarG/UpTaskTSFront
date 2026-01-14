@@ -33,6 +33,11 @@ export default function AppLayout() {
           Todos los derechos reservados {new Date().getFullYear()}
         </p>
       </footer>
+
+      <ToastContainer
+        pauseOnHover={false}
+        pauseOnFocusLoss={false}
+      />
     </>
   );
 };
