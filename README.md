@@ -72,5 +72,8 @@
   - Con estas configuraciones, los **import** se mandarán a llamar de la siguiente manera:
     - Antes de la configuración: _import Logo from "../components/Logo";_
     - Después de la configuración: _import Logo from "@/components/Logo";_
+- Menú Hamburguesa:
+  - _https://headlessui.com/_
+  - **_npm i @headlessui/react @heroicons/react_**
 - React Hook Form
 - React Query

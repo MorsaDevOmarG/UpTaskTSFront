@@ -11,7 +11,9 @@
     // Se agregaron estas líneas para los IMPORT
     "baseUrl": "src",
     "paths": {
-      "@/components/*": ["components/*"]
+      "@/components/*": ["components/*"],
+      "@/views/*": ["views/*"],
+      "@/layouts/*": ["layouts/*"]
     },
 
     /* Bundler mode */
