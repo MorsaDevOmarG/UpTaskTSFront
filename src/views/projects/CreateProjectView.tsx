@@ -1,7 +1,8 @@
 import ProjectForm from "@/components/projects/ProjectForm";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import type { ProjectFormData } from "types";
+import type { ProjectFormData } from '@/types/index';
+import { createProject } from "@/api/ProjectAPI";
 
 export default function CreateProjectView() {
   const initialValues : ProjectFormData = {
@@ -17,7 +18,9 @@ export default function CreateProjectView() {
   } = useForm({ defaultValues: { initialValues } });
 
   const handleForm = (data : ProjectFormData) => {
-    console.log(data);
+    // console.log(data);
+    // De esta forma se pasarán los datos a ese archivo
+    createProject(data);
   };
 
   return (
