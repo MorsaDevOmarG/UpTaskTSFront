@@ -86,5 +86,8 @@
   - Se genera el archivo:
     - _axios.ts_
   - Dentro de él se realiza la configuración para apuntar a la _URL_ de la _API_.
+- Toast
+  - **_npm i react-toastify_**
+  - Mostrar alertas o mensajes.
 - React Query
   -
