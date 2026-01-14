@@ -8,6 +8,12 @@
     "types": ["vite/client"],
     "skipLibCheck": true,
 
+    // Se agregaron estas líneas para los IMPORT
+    "baseUrl": "src",
+    "paths": {
+      "@/components/*": ["components/*"]
+    },
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
