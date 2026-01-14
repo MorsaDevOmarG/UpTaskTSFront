@@ -90,4 +90,17 @@
   - **_npm i react-toastify_**
   - Mostrar alertas o mensajes.
 - React Query
-  -
+  - **_npm i @tanstack/react-query_**
+
+### REACT QUERY
+
+- Ó también: _TanStack Query_ es una librería para obtener datos del servidor.
+- Sus ventajas principales son que obtiene los datos de forma optimizada y rápida; además cachea las consultas, sincroniza y actualiza los datos del servidor de forma muy simple.
+- Se puede utilizar con: _FETCH API o Axios_.
+- Introduce una gran cantidad de conceptos nuevos; pero hay 2 que son los más importantes.
+- **QUERIES**
+  - Se utilizan para obtener datos de un servidor o una _API (GET)_.
+- **MUTATIONS**
+  - Se utilizan para **crear / actualizar / eliminar** datos en el servidor: _(POST, PUT, PATCH, DELETE)_.
+- Instalación:
+  - **_npm i @tanstack/react-query_**
