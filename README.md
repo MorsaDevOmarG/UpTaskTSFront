@@ -77,5 +77,7 @@
   - **_npm i @headlessui/react @heroicons/react_**
 - React Hook Form
   - **_npm i react-hook-form_**
+- ZOD
+  - **_npm i zod_**
 - React Query
   -
