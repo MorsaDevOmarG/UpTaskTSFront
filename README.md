@@ -76,4 +76,6 @@
   - _https://headlessui.com/_
   - **_npm i @headlessui/react @heroicons/react_**
 - React Hook Form
+  - **_npm i react-hook-form_**
 - React Query
+  -
