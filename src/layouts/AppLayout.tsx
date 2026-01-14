@@ -1,9 +1,18 @@
 import { Outlet } from "react-router-dom";
+import Logo from "../components/Logo";
 
 export default function AppLayout() {
   return (
     <>
-      <div>Layout</div>
+      <header className="bg-gray-800">
+        <div className="max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between items-center">
+          <div className="w-64">
+            <Logo />
+          </div>
+
+          <nav></nav>
+        </div>
+      </header>
 
       {/* OUTLET: muestra la vista hija, ejemplo:
         <Route element={<AppLayout />}>
@@ -11,7 +20,15 @@ export default function AppLayout() {
         </Route>
         En este ejemplo, la vista hija es DASHBOARD
       */}
-      <Outlet />
+      <section className="max-w-screen-2xl mx-auto mt-10 p-5">
+        <Outlet />
+      </section>
+
+      <footer className="py-5">
+        <p className="text-center">
+          Todos los derechos reservados {new Date().getFullYear()}
+        </p>
+      </footer>
     </>
   );
 };
