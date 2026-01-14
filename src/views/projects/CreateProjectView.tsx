@@ -1,10 +1,12 @@
 import ProjectForm from "@/components/projects/ProjectForm";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import type { ProjectFormData } from '@/types/index';
 import { createProject } from "@/api/ProjectAPI";
 
 export default function CreateProjectView() {
+  const navigate = useNavigate();
+
   const initialValues : ProjectFormData = {
     projectName: "",
     clientName: "",
@@ -17,10 +19,13 @@ export default function CreateProjectView() {
     formState: { errors },
   } = useForm({ defaultValues: { initialValues } });
 
-  const handleForm = (data : ProjectFormData) => {
+  const handleForm = async (data : ProjectFormData) => {
     // console.log(data);
     // De esta forma se pasarán los datos a ese archivo
-    createProject(data);
+    await createProject(data);
+    
+    // Es para redireccionar
+    navigate('/');
   };
 
   return (
