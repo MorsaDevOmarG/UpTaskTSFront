@@ -100,7 +100,9 @@
 - Introduce una gran cantidad de conceptos nuevos; pero hay 2 que son los más importantes.
 - **QUERIES**
   - Se utilizan para obtener datos de un servidor o una _API (GET)_.
+  - _useQuery_
 - **MUTATIONS**
   - Se utilizan para **crear / actualizar / eliminar** datos en el servidor: _(POST, PUT, PATCH, DELETE)_.
 - Instalación:
   - **_npm i @tanstack/react-query_**
+  - _useMutation_

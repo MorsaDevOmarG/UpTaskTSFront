@@ -1,14 +1,15 @@
 import ProjectForm from "@/components/projects/ProjectForm";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import type { ProjectFormData } from '@/types/index';
+import type { ProjectFormData } from "@/types/index";
 import { createProject } from "@/api/ProjectAPI";
 import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
 
 export default function CreateProjectView() {
   const navigate = useNavigate();
 
-  const initialValues : ProjectFormData = {
+  const initialValues: ProjectFormData = {
     projectName: "",
     clientName: "",
     description: "",
@@ -20,16 +21,31 @@ export default function CreateProjectView() {
     formState: { errors },
   } = useForm({ defaultValues: { initialValues } });
 
-  const handleForm = async (formData : ProjectFormData) => {
+  // const mutation = useMutation({
+  const { mutate } = useMutation({
+    mutationFn: createProject,
+    onError: () => {},
+    onSuccess: (data) => {
+      toast.success(data);
+
+      navigate("/");
+    },
+  });
+
+  const handleForm = async (formData: ProjectFormData) => {
     // console.log(data);
     // De esta forma se pasarán los datos a ese archivo
     // await createProject(data);
-    const data = await createProject(formData);
+    // const data = await createProject(formData);
 
-    toast.success(data);
-    
+    // toast.success(data);
+
     // Es para redireccionar
-    navigate('/');
+    // navigate('/');
+
+    // await mutation.mutateAsync(formData);
+    // mutation.mutate(formData);
+    mutate(formData);
   };
 
   return (
@@ -56,10 +72,7 @@ export default function CreateProjectView() {
           // Desactiva la validación de HTML
           noValidate
         >
-          <ProjectForm
-            register={register}
-            errors={errors}
-          />
+          <ProjectForm register={register} errors={errors} />
 
           <input
             type="submit"
