@@ -91,6 +91,7 @@
   - Mostrar alertas o mensajes.
 - React Query
   - **_npm i @tanstack/react-query_**
+  - **_npm i @tanstack/react-query-devtools_**
 
 ### REACT QUERY
 
