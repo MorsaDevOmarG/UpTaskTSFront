@@ -4,15 +4,21 @@ import { Link } from "react-router-dom";
 
 export default function DashBoardView() {
   // El queryKey, debe ser único
-  const { data, isError, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["projects"],
     queryFn: getProjects,
   });
-  console.log(data);
-  console.log(isError);
-  console.log(isLoading);
+  // console.log(data);
+  // console.log(isError);
+  // console.log(isLoading);
 
-  return (
+  if (isLoading) {
+    return 'Cargando...';
+  }
+
+  console.log(data);
+
+  if (data) return (
     <>
       <h1 className="text-5xl font-black">Mis Proyectos</h1>
 
@@ -28,6 +34,36 @@ export default function DashBoardView() {
           Nuevo proyecto
         </Link>
       </nav>
+
+      {/* { */}
+        {/* data?.map(project => ( */}
+        {/* data.map(project => (
+          <p>
+            {
+              project.clientName
+            }
+          </p>
+        ))
+      } */}
+
+      {
+        data.length
+          ? (
+            <p>Si hay proyectos</p>
+          )
+            : (
+            <p className="text-center py-20">
+              No hay proyectos aún... {''}
+
+              <Link
+                to={'/projects/create'}
+                className="text-fuchsia-500 font-bold"
+              >
+                Crear Proyecto
+              </Link>
+            </p>
+          )
+      }
     </>
   );
 }
