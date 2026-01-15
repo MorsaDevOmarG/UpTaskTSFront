@@ -19,7 +19,7 @@ export default function DashBoardView() {
     return 'Cargando...';
   }
 
-  console.log(data);
+  // console.log(data);
 
   if (data) return (
     <>

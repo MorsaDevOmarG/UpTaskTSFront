@@ -36,7 +36,8 @@ export default function CreateProjectView() {
     },
   });
 
-  const handleForm = async (formData: ProjectFormData) => {
+  // const handleForm = async (formData: ProjectFormData) => {
+  const handleForm = (formData: ProjectFormData) => {
     // console.log(data);
     // De esta forma se pasarán los datos a ese archivo
     // await createProject(data);
