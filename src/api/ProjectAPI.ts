@@ -1,7 +1,6 @@
 import api from "@/lib/axios";
 import {
   dashboardProjectSchema,
-  editProjectSchema,
   type Project,
   type ProjectFormData,
 } from "@/types/index";
@@ -44,10 +43,10 @@ export async function getProjects() {
   }
 }
 
-export async function getProjectById(id: Project["_id"]) {
+export async function getProjectById(id: Project['_id']) {
   try {
     const { data } = await api(`/projects/${id}`);
-    console.log("getProjectById:", data);
+    // console.log("getProjectById - data:", data);
 
     return data;
   } catch (error) {
