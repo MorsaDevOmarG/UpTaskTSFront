@@ -1,6 +1,9 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useLocation, useNavigate } from "react-router-dom";
+import TaskForm from './TaskForm';
+import { useForm } from "react-hook-form";
+import type { TaskFormData } from "@/types/index";
 
 export default function AddTaskModal() {
   const navigate = useNavigate();
@@ -15,15 +18,34 @@ export default function AddTaskModal() {
   const modalTask = queryParams.get('newTask');
   // console.log(modalTask);
 
-  const show = modalTask ? true : false
+  const show = modalTask ? true : false;
+
+  const initialValues: TaskFormData = {
+    name: '',
+    description: ''
+  };
+
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: initialValues
+  });
+
+  const handleCreateTask = (formData: TaskFormData) => {
+    console.log(formData);
+  };
 
   return (
     <>
       <Transition appear show={show} as={Fragment}>
         {/* location.pathname = para que se quede en la misma URL */}
-        <Dialog as="div" className="relative z-10" onClose={() => navigate(location.pathname, {
-          replace: true
-        })}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() =>
+            navigate(location.pathname, {
+              replace: true,
+            })
+          }
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -56,6 +78,23 @@ export default function AddTaskModal() {
                     Llena el formulario y crea {""}
                     <span className="text-fuchsia-600">una tarea</span>
                   </p>
+
+                  <form
+                    className="mt-10 space-y-3"
+                    noValidate
+                    onSubmit={handleSubmit(handleCreateTask)}
+                  >
+                    <TaskForm
+                      register={register}
+                      errors={errors}
+                    />
+
+                    <input
+                      type="submit"
+                      value="Guardar Tarea"
+                      className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors"
+                    />
+                  </form>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
