@@ -26,6 +26,6 @@ export default function EditProjectView() {
   }
 
   if (data) {
-    return <EditProjectForm />
+    return <EditProjectForm data={data} />
   }
 };
