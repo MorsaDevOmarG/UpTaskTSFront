@@ -1,6 +1,7 @@
 import { getTaskById } from "@/api/TaskAPI";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation, useParams } from "react-router-dom"
+import EditTaskModal from "./EditTaskModal";
 
 export default function EditTaskData() {
   // const location = useLocation();
@@ -25,12 +26,10 @@ export default function EditTaskData() {
       projectId,
       taskId
     }),
+    // Doble !!, lo convierte a BOOLEAN
+    enabled: !!taskId
   });
-  console.log(data);
+  // console.log(data);
 
-  return (
-    <div>
-      TaskData    
-    </div>
-  )
+  if (data) return <EditTaskModal />
 }
