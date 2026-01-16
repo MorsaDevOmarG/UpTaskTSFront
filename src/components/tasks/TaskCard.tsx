@@ -1,13 +1,13 @@
 import type { Task } from "@/types/index";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
-import { Fragment } from 'react';
+import { Fragment } from "react";
 
 type TaskCardProps = {
-  task: Task
+  task: Task;
 };
 
-export default function TaskCard({task}: TaskCardProps) {
+export default function TaskCard({ task }: TaskCardProps) {
   return (
     <li className="p-5 bg-white border-slate-300 flex justify-between gap-3">
       <div className="min-w-0 flex flex-col gap-y-4">
@@ -16,9 +16,9 @@ export default function TaskCard({task}: TaskCardProps) {
           className="text-xl font-bold text-slate-600 text-left"
         >
           {task.name}
-
-          <p className="text-slate-500">{task.description}</p>
         </button>
+        
+        <p className="text-slate-500">{task.description}</p>
       </div>
 
       <div className="flex shrink-0  gap-x-6">
