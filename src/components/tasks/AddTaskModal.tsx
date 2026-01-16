@@ -1,36 +1,74 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useLocation, useNavigate } from "react-router-dom";
-import TaskForm from './TaskForm';
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import TaskForm from "./TaskForm";
 import { useForm } from "react-hook-form";
 import type { TaskFormData } from "@/types/index";
+import { useMutation } from "@tanstack/react-query";
+import { createTask } from "@/api/TaskAPI";
+import { toast } from "react-toastify";
 
 export default function AddTaskModal() {
   const navigate = useNavigate();
-  console.log(navigate);
+  // console.log(navigate);
 
+  // Leer si MODAL existe
   const location = useLocation();
   // console.log("Location:", location);
 
   const queryParams = new URLSearchParams(location.search);
   // console.log(queryParams);
 
-  const modalTask = queryParams.get('newTask');
+  const modalTask = queryParams.get("newTask");
   // console.log(modalTask);
 
   const show = modalTask ? true : false;
 
+  // Obtener projectId
+  const params = useParams();
+  // console.log(params);
+  const projectId = params.projectId!;
+
   const initialValues: TaskFormData = {
-    name: '',
-    description: ''
+    name: "",
+    description: "",
   };
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    defaultValues: initialValues
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: initialValues,
+  });
+
+  const { mutate } = useMutation({
+    mutationFn: createTask,
+    onError: (error) => {
+      toast.error(error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data);
+      
+      reset();
+      
+      navigate(location.pathname, {
+        replace: true,
+      });
+    },
   });
 
   const handleCreateTask = (formData: TaskFormData) => {
-    console.log(formData);
+    // console.log(formData);
+
+    const data = {
+      formData,
+      projectId,
+    };
+    // console.log(data);
+
+    mutate(data);
   };
 
   return (
@@ -84,10 +122,7 @@ export default function AddTaskModal() {
                     noValidate
                     onSubmit={handleSubmit(handleCreateTask)}
                   >
-                    <TaskForm
-                      register={register}
-                      errors={errors}
-                    />
+                    <TaskForm register={register} errors={errors} />
 
                     <input
                       type="submit"
