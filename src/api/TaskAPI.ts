@@ -27,9 +27,10 @@ export async function createTask({
 
 export async function getTaskById({ projectId, taskId }: Pick<TaskAPI, 'projectId' | 'taskId'>) {
   try {
-    const url = `/projects/${projectId}/task/${taskId}`;
+    const url = `/projects/${projectId}/tasks/${taskId}`;
 
     const { data } = await api(url);
+        // const { data } = await api.get<Task>(url);
 
     return data;
   } catch (error) {
