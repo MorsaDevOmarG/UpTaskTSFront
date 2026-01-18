@@ -6,6 +6,7 @@ type TaskAPI = {
   formData: TaskFormData;
   projectId: Project["_id"];
   taskId: Task['_id'];
+  // status: ;
 };
 
 export async function createTask({
@@ -31,6 +32,27 @@ export async function getTaskById({ projectId, taskId }: Pick<TaskAPI, 'projectI
 
     const { data } = await api(url);
         // const { data } = await api.get<Task>(url);
+
+    return data;
+  } catch (error) {
+    // console.log(error);
+
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function updateTask({
+  projectId,
+  taskId,
+  formData
+}: Pick<TaskAPI, "projectId" | "taskId" | "formData">) {
+  try {
+    const url = `/projects/${projectId}/tasks/${taskId}`;
+
+    const { data } = await api.put<string>(url, formData);
+    // const { data } = await api.get<Task>(url);
 
     return data;
   } catch (error) {
