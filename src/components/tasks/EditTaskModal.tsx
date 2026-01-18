@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 type EditTaskModalProps = {
   data: Task;
-  taskId: Task['_id'];
+  taskId: Task["_id"];
 };
 
 export default function EditTaskModal({ data, taskId }: EditTaskModalProps) {
@@ -20,11 +20,16 @@ export default function EditTaskModal({ data, taskId }: EditTaskModalProps) {
 
   const projectId = params.projectId!;
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<TaskFormData>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<TaskFormData>({
     defaultValues: {
       name: data.name,
-      description: data.description
-    }
+      description: data.description,
+    },
   });
 
   const queryClient = useQueryClient();
@@ -36,12 +41,12 @@ export default function EditTaskModal({ data, taskId }: EditTaskModalProps) {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: ["editProject", projectId],
+        queryKey: ["project", projectId],
       });
       toast.success(data);
       reset();
       navigate(location.pathname, { replace: true });
-    }
+    },
   });
 
   const handleEditTask = (formData: TaskFormData) => {
@@ -50,7 +55,7 @@ export default function EditTaskModal({ data, taskId }: EditTaskModalProps) {
     const data = {
       projectId,
       taskId,
-      formData
+      formData,
     };
 
     mutate(data);
@@ -101,10 +106,7 @@ export default function EditTaskModal({ data, taskId }: EditTaskModalProps) {
                   noValidate
                   onSubmit={handleSubmit(handleEditTask)}
                 >
-                  <TaskForm
-                    register={register}
-                    errors={errors}
-                  />
+                  <TaskForm register={register} errors={errors} />
 
                   <input
                     type="submit"

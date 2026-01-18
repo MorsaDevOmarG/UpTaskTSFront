@@ -1,5 +1,5 @@
 import { getProjectById } from "@/api/ProjectAPI";
-import EditProjectForm from "@/components/projects/EditProjectForm";
+// import EditProjectForm from "@/components/projects/EditProjectForm";
 import AddTaskModal from "@/components/tasks/AddTaskModal";
 import EditTaskData from "@/components/tasks/EditTaskData";
 import TaskList from "@/components/tasks/TaskList";
@@ -14,7 +14,8 @@ export default function ProjectDetailsView() {
   const projectId = params.projectId!;
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["editProject", projectId],
+    // queryKey: ["editProject", projectId],
+    queryKey: ["project", projectId],
     queryFn: () => getProjectById(projectId),
     retry: false,
   });
