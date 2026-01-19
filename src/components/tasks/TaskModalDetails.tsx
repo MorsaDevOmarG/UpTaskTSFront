@@ -4,6 +4,7 @@ import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query";
 import { getTaskById } from "@/api/TaskAPI";
 import { toast } from "react-toastify";
+import { formatDate } from "@/utils/utils";
 
 export default function TaskModalDetails() {
   const params = useParams();
@@ -37,7 +38,11 @@ export default function TaskModalDetails() {
   if (data) return (
     <>
       <Transition appear show={show} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={() => navigate(location.pathname, {replace: true})}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() => navigate(location.pathname, { replace: true })}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -62,9 +67,13 @@ export default function TaskModalDetails() {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16">
-                  <p className="text-sm text-slate-400">Agregada el: </p>
                   <p className="text-sm text-slate-400">
-                    Última actualización:{" "}
+                    {/* Agregada el: {data.createdAt} */}
+                    Agregada el: {formatDate(data.createdAt)}
+                  </p>
+                  <p className="text-sm text-slate-400">
+                    {/* Última actualización: {data.updatedAt} */}
+                    Última actualización: {formatDate(data.updatedAt)}
                   </p>
                   <Dialog.Title
                     as="h3"
@@ -72,9 +81,13 @@ export default function TaskModalDetails() {
                   >
                     {data?.name}
                   </Dialog.Title>
-                  <p className="text-lg text-slate-500 mb-2">Descripción: {data.description}</p>
+                  <p className="text-lg text-slate-500 mb-2">
+                    Descripción: {data.description}
+                  </p>
                   <div className="my-5 space-y-3">
-                    <label className="font-bold">Estado Actual: {data.status}</label>
+                    <label className="font-bold">
+                      Estado Actual: {data.status}
+                    </label>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
