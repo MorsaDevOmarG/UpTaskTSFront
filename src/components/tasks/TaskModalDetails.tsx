@@ -43,9 +43,9 @@ export default function TaskModalDetails() {
     },
     onSuccess: (data) => {
       toast.success(data);
-      
+
       queryClient.invalidateQueries({
-        queryKey: ["projectId", projectId],
+        queryKey: ["project", projectId],
       });
 
       queryClient.invalidateQueries({
