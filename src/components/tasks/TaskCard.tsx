@@ -44,7 +44,7 @@ export default function TaskCard({ task }: TaskCardProps) {
         >
           {task.name}
         </button>
-        
+
         <p className="text-slate-500">{task.description}</p>
       </div>
 
@@ -68,6 +68,9 @@ export default function TaskCard({ task }: TaskCardProps) {
                 <button
                   type="button"
                   className="block px-3 py-1 text-sm leading-6 text-gray-900"
+                  onClick={() =>
+                    navigate(location.pathname + `?viewTask=${task._id}`)
+                  }
                 >
                   Ver Tarea
                 </button>
@@ -76,7 +79,9 @@ export default function TaskCard({ task }: TaskCardProps) {
                 <button
                   type="button"
                   className="block px-3 py-1 text-sm leading-6 text-gray-900"
-                  onClick={() => navigate(location.pathname + `?editTask=${task._id}`)}
+                  onClick={() =>
+                    navigate(location.pathname + `?editTask=${task._id}`)
+                  }
                 >
                   Editar Tarea
                 </button>
@@ -86,7 +91,7 @@ export default function TaskCard({ task }: TaskCardProps) {
                 <button
                   type="button"
                   className="block px-3 py-1 text-sm leading-6 text-red-500"
-                  onClick={() => mutate({projectId, taskId: task._id})}
+                  onClick={() => mutate({ projectId, taskId: task._id })}
                 >
                   Eliminar Tarea
                 </button>
