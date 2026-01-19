@@ -92,6 +92,8 @@
 - React Query
   - **_npm i @tanstack/react-query_**
   - **_npm i @tanstack/react-query-devtools_**
+- Traducción es contenido
+  - **_npm i react-i18next_**
 
 ### REACT QUERY
 
