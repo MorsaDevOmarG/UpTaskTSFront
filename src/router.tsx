@@ -6,6 +6,8 @@ import DashBoardView from "@/views/DashBoardView";
 import CreateProjectView from "./views/projects/CreateProjectView";
 import EditProjectView from "./views/projects/EditProjectView";
 import ProjectDetailsView from "./views/projects/ProjectDetailsView";
+import AuthLayout from "./layouts/AuthLayout";
+import LoginView from "./views/auth/LoginView";
 
 export default function Router() {
   return (
@@ -16,6 +18,10 @@ export default function Router() {
           <Route path="/projects/create" element={<CreateProjectView />} />
           <Route path="/projects/:projectId" element={<ProjectDetailsView />} />
           <Route path="/projects/:projectId/edit" element={<EditProjectView />} />
+        </Route>
+
+        <Route element={<AuthLayout />}>
+          <Route path="/auth/login" element={<LoginView />} />
         </Route>
       </Routes>
     </BrowserRouter>
