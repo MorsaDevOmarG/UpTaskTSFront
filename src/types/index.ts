@@ -1,4 +1,16 @@
 import { z } from "zod";
+import { UserLoginForm } from '@/types/index';
+
+// Auth & Users
+const authSchema = z.object({
+  name: z.string(),
+  email: z.string().email(),
+  password: z.string(),
+  password_confirmation: z.string(),
+});
+
+export type Auth = z.infer<typeof authSchema>;
+export type UserLoginForm = Pick<Auth, 'name' | 'password'>;
 
 // Tasks
 export const taskStatusSchema = z.enum([
