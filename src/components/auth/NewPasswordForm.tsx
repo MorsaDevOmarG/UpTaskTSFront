@@ -70,7 +70,7 @@ export default function NewPasswordForm() {
 
         <input
           type="submit"
-          value="Establecer Password"
+          value="Reestablecer Password"
           className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3  text-white font-black  text-xl cursor-pointer"
         />
       </form>
