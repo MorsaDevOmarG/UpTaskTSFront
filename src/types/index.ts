@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { UserLoginForm } from '@/types/index';
+import RequestNewCodeView from '../views/auth/RequestNewCodeView';
 
 // Auth & Users
 const authSchema = z.object({
@@ -14,6 +15,7 @@ export type Auth = z.infer<typeof authSchema>;
 export type UserLoginForm = Pick<Auth, 'name' | 'password'>;
 export type UserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | 'password_confirmation'>;
 export type ConfirmToken = Pick<Auth, 'token'>;
+export type RequestNewCodeView = Pick<Auth, 'email'>;
 
 // Tasks
 export const taskStatusSchema = z.enum([
