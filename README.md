@@ -94,6 +94,9 @@
   - **_npm i @tanstack/react-query-devtools_**
 - Traducción es contenido
   - **_npm i react-i18next_**
+- TOKENS
+  - **_npm i @chakra-ui/pin-input_**
+  - Es para poner los recuadros e ingresar los digítos del PIN
 
 ### REACT QUERY
 
