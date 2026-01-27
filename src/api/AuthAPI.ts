@@ -1,11 +1,13 @@
 import { isAxiosError } from "axios";
-import type {
-  ConfirmToken,
-  ForgotPasswordForm,
-  NewPasswordForm,
-  RequestNewCodeView,
-  UserLoginForm,
-  UserRegistrationForm,
+import {
+  userSchema,
+  type ConfirmToken,
+  type ForgotPasswordForm,
+  type NewPasswordForm,
+  type RequestNewCodeView,
+  type User,
+  type UserLoginForm,
+  type UserRegistrationForm,
 } from "../types";
 import api from "@/lib/axios";
 // import { ConfirmToken } from "../types/index";
@@ -112,8 +114,15 @@ export async function updatePasswordWithToken({
 
 export async function getUser() {
   try {
-    const { data } = await api("/auth/user");
-    
+    const { data } = await api<User>("/auth/user");
+    // const { data } = await api("/auth/user");
+    // const response = userSchema.safeParse(data);
+    // console.log("getUser - response:", response);
+
+    // if (response.success) {
+    //   return response.data;
+    // }
+
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {

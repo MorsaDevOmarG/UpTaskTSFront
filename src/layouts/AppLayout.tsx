@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "@/hooks/useAuth";
 
 export default function AppLayout() {
-  const { user, isLoading, isError, refetch } = useAuth();
+  const { data, isLoading, isError } = useAuth();
   // console.log({ user, isLoading, isError });
 
   if (isLoading) {
@@ -20,7 +20,7 @@ export default function AppLayout() {
     return <Navigate to="/auth/login" />;
   }
 
-  return (
+  if (data) return (
     <>
       <header className="bg-gray-800">
         <div className="max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between items-center">
