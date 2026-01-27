@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import type { UserLoginForm } from "@/types/index";
 import ErrorMessage from "@/components/ErrorMessage";
-import { data, Link } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { authenticateUser } from "@/api/AuthAPI";
 import { toast } from "react-toastify";
@@ -11,11 +11,14 @@ export default function LoginView() {
     email: "",
     password: "",
   };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
+
+  const navigate = useNavigate();
 
   const { mutate } = useMutation({
     mutationFn: authenticateUser,
@@ -24,7 +27,9 @@ export default function LoginView() {
     },
     onSuccess: () => {
       // toast.success(data);
-      toast.success('Iniciando Sesión');
+      // toast.success('Iniciando Sesión');
+
+      navigate('/');
     }
   });
 
