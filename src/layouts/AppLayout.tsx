@@ -1,11 +1,25 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 // import Logo from "../components/Logo";
 import Logo from "@/components/Logo";
 import NavMenu from "@/components/NavMenu";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from "@/hooks/useAuth";
 
 export default function AppLayout() {
+  const { user, isLoading, isError, refetch } = useAuth();
+  // console.log({ user, isLoading, isError });
+
+  if (isLoading) {
+    return "Cargando...";
+  }
+
+  if (isError) {
+    // return "Error al cargar los datos del usuario.";
+
+    return <Navigate to="/auth/login" />;
+  }
+
   return (
     <>
       <header className="bg-gray-800">
