@@ -1,58 +1,60 @@
-import { Link, Navigate, Outlet } from "react-router-dom";
-// import Logo from "../components/Logo";
-import Logo from "@/components/Logo";
-import NavMenu from "@/components/NavMenu";
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import { useAuth } from "@/hooks/useAuth";
+  import { Link, Navigate, Outlet } from "react-router-dom";
+  // import Logo from "../components/Logo";
+  import Logo from "@/components/Logo";
+  import NavMenu from "@/components/NavMenu";
+  import { ToastContainer } from "react-toastify";
+  import 'react-toastify/dist/ReactToastify.css';
+  import { useAuth } from "@/hooks/useAuth";
 
-export default function AppLayout() {
-  const { data, isLoading, isError } = useAuth();
-  // console.log({ user, isLoading, isError });
+  export default function AppLayout() {
+    const { data, isLoading, isError } = useAuth();
+    // console.log({ user, isLoading, isError });
+    console.log("AppLayout - data:", data);
 
-  if (isLoading) {
-    return "Cargando...";
-  }
+    if (isLoading) {
+      return "Cargando...";
+    }
 
-  if (isError) {
-    // return "Error al cargar los datos del usuario.";
+    if (isError) {
+      // return "Error al cargar los datos del usuario.";
 
-    return <Navigate to="/auth/login" />;
-  }
+      return <Navigate to="/auth/login" />;
+    }
 
-  if (data) return (
-    <>
-      <header className="bg-gray-800">
-        <div className="max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between items-center">
-          <div className="w-64">
-            <Link to={'/'}>
-              <Logo />
-            </Link>
+    if (data) return (
+      <>
+        <header className="bg-gray-800">
+          <div className="max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between items-center">
+            <div className="w-64">
+              <Link to={"/"}>
+                <Logo />
+              </Link>
+            </div>
+
+            <NavMenu
+              // name={data.name}
+              name={data.user.name}
+            />
           </div>
+        </header>
 
-          <NavMenu
-            name={data.name}
-          />
-        </div>
-      </header>
+        {/* OUTLET: muestra la vista hija, ejemplo:
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<DashBoardView />} index />
+          </Route>
+          En este ejemplo, la vista hija es DASHBOARD
+        */}
+        <section className="max-w-screen-2xl mx-auto mt-10 p-5">
+          <Outlet />
+        </section>
 
-      {/* OUTLET: muestra la vista hija, ejemplo:
-        <Route element={<AppLayout />}>
-          <Route path="/" element={<DashBoardView />} index />
-        </Route>
-        En este ejemplo, la vista hija es DASHBOARD
-      */}
-      <section className="max-w-screen-2xl mx-auto mt-10 p-5">
-        <Outlet />
-      </section>
+        <footer className="py-5">
+          <p className="text-center">
+            Todos los derechos reservados {new Date().getFullYear()}
+          </p>
+        </footer>
 
-      <footer className="py-5">
-        <p className="text-center">
-          Todos los derechos reservados {new Date().getFullYear()}
-        </p>
-      </footer>
-
-      <ToastContainer pauseOnHover={false} pauseOnFocusLoss={false} />
-    </>
-  );
-};
+        <ToastContainer pauseOnHover={false} pauseOnFocusLoss={false} />
+      </>
+    );
+  };
