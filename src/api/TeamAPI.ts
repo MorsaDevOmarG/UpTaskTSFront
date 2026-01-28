@@ -1,8 +1,14 @@
-import { isAxiosError } from 'axios';
-import type { Project, TeamMember, TeamMemberForm } from '../types';
-import api from '@/lib/axios';
+import { isAxiosError } from "axios";
+import { teamMembersSchema, type Project, type TeamMember, type TeamMemberForm } from "../types";
+import api from "@/lib/axios";
 
-export async function findUserByEmail({projectId, formData}: {projectId: Project['_id'], formData: TeamMemberForm}) {
+export async function findUserByEmail({
+  projectId,
+  formData,
+}: {
+  projectId: Project["_id"];
+  formData: TeamMemberForm;
+}) {
   try {
     const url = `/projects/${projectId}/team/find`;
 
@@ -17,7 +23,13 @@ export async function findUserByEmail({projectId, formData}: {projectId: Project
   }
 }
 
-export async function addUserToProject({projectId, id}: {projectId: Project['_id'], id: TeamMember['_id']}) {
+export async function addUserToProject({
+  projectId,
+  id,
+}: {
+  projectId: Project["_id"];
+  id: TeamMember["_id"];
+}) {
   try {
     const url = `/projects/${projectId}/team`;
 
@@ -25,6 +37,27 @@ export async function addUserToProject({projectId, id}: {projectId: Project['_id
     // console.log(data);
 
     return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function getProjectTeam(projectId: Project["_id"]) {
+  try {
+    const url = `/projects/${projectId}/team`;
+
+    const { data } = await api(url);
+    // console.log(data);
+
+    const response = teamMembersSchema.safeParse(data);
+
+    if (response.success) {
+      return response.data;
+    }
+
+    // return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
       throw new Error(error.response.data.error);
