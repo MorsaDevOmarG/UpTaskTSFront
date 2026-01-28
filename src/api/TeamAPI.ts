@@ -27,7 +27,7 @@ export async function addUserToProject({projectId, id}: {projectId: Project['_id
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
-      throw new Error(error.response.data.message);
+      throw new Error(error.response.data.error);
     }
   }
 }

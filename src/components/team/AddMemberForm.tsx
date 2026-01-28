@@ -28,7 +28,7 @@ export default function AddMemberForm() {
     const data = { projectId, formData };
 
     mutation.mutate(data);
-    console.log(data);
+    // console.log(data);
   };
 
   return (
