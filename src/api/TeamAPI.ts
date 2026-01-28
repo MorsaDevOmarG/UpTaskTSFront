@@ -7,7 +7,7 @@ export async function findUserByEmail({projectId, formData}: {projectId: Project
     const url = `/projects/${projectId}/team/find`;
 
     const { data } = await api.post(url, formData);
-    console.log(data);
+    // console.log(data);
 
     return data;
   } catch (error) {
