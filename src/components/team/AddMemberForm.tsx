@@ -31,6 +31,12 @@ export default function AddMemberForm() {
     // console.log(data);
   };
 
+  const resetDAta = () => {
+    reset();
+
+    mutation.reset();
+  };
+
   return (
     <>
       <form
@@ -74,7 +80,7 @@ export default function AddMemberForm() {
           <p className="text-center">Usuario no encontrado</p>
         )}
 
-        {mutation.data && <SearchResult user={mutation.data.user} />}
+        {mutation.data && <SearchResult user={mutation.data.user} reset={resetDAta} />}
       </div>
     </>
   );
