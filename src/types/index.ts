@@ -1,6 +1,4 @@
 import { z } from "zod";
-import { UserLoginForm } from '@/types/index';
-import RequestNewCodeView from '../views/auth/RequestNewCodeView';
 
 // Auth & Users
 const authSchema = z.object({
@@ -14,10 +12,11 @@ const authSchema = z.object({
 export type Auth = z.infer<typeof authSchema>;
 export type UserLoginForm = Pick<Auth, 'email' | 'password'>;
 export type UserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | 'password_confirmation'>;
-export type ConfirmToken = Pick<Auth, 'token'>;
-export type RequestNewCodeView = Pick<Auth, 'email'>;
+// export type RequestNewCodeView = Pick<Auth, 'email'>;
+export type RequestConfirmationCodeForm = Pick<Auth, 'email'>;
 export type ForgotPasswordForm = Pick<Auth, 'email'>;
 export type NewPasswordForm = Pick<Auth, 'password' | 'password_confirmation'>;
+export type ConfirmToken = Pick<Auth, 'token'>;
 
 // Users
 export const userSchema = authSchema.pick({
@@ -28,6 +27,7 @@ export const userSchema = authSchema.pick({
 });
 
 export type User = z.infer<typeof userSchema>;
+// export type UserProfileForm = Pick<User, "name" | "email">;
 
 // Tasks
 export const taskStatusSchema = z.enum([
@@ -45,8 +45,16 @@ export const taskSchema = z.object({
   description: z.string(),
   project: z.string(),
   status: taskStatusSchema,
+  completedBy: userSchema.or(z.null()),
   createdAt: z.string(),
   updatedAt: z.string()
+});
+
+export const taskProjectSchema = taskSchema.pick({
+  _id: true,
+  name: true,
+  description: true,
+  status: true,
 });
 
 export type Task = z.infer<typeof taskSchema>;

@@ -40,8 +40,9 @@ export async function getTaskById({
 
     const { data } = await api(url);
     // const { data } = await api.get<Task>(url);
+    // console.log(data);
     const response = taskSchema.safeParse(data);
-    // console.log(response);
+    // console.log(response.data);
 
     if (response.success) {
       return response.data;
