@@ -42,6 +42,7 @@ export default function TaskCard({ task, cantEdit }: TaskCardProps) {
         <button
           type="submit"
           className="text-xl font-bold text-slate-600 text-left"
+          onClick={() => navigate(location.pathname + `?viewTask=${task._id}`)}
         >
           {task.name}
         </button>
