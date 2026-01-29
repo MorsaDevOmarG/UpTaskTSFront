@@ -1,27 +1,28 @@
-  import { Link, Navigate, Outlet } from "react-router-dom";
-  // import Logo from "../components/Logo";
-  import Logo from "@/components/Logo";
-  import NavMenu from "@/components/NavMenu";
-  import { ToastContainer } from "react-toastify";
-  import 'react-toastify/dist/ReactToastify.css';
-  import { useAuth } from "@/hooks/useAuth";
+import { Link, Navigate, Outlet } from "react-router-dom";
+// import Logo from "../components/Logo";
+import Logo from "@/components/Logo";
+import NavMenu from "@/components/NavMenu";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "@/hooks/useAuth";
 
-  export default function AppLayout() {
-    const { data, isLoading, isError } = useAuth();
-    // console.log({ user, isLoading, isError });
-    console.log("AppLayout - data:", data);
+export default function AppLayout() {
+  const { data, isLoading, isError } = useAuth();
+  // console.log({ data, isLoading, isError });
+  // console.log("AppLayout - data:", data);
 
-    if (isLoading) {
-      return "Cargando...";
-    }
+  if (isLoading) {
+    return "Cargando...";
+  }
 
-    if (isError) {
-      // return "Error al cargar los datos del usuario.";
+  if (isError) {
+    // return "Error al cargar los datos del usuario.";
 
-      return <Navigate to="/auth/login" />;
-    }
+    return <Navigate to="/auth/login" />;
+  }
 
-    if (data) return (
+  if (data)
+    return (
       <>
         <header className="bg-gray-800">
           <div className="max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between items-center">
@@ -57,4 +58,4 @@
         <ToastContainer pauseOnHover={false} pauseOnFocusLoss={false} />
       </>
     );
-  };
+}

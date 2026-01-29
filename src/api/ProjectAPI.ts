@@ -34,7 +34,7 @@ export async function getProjects() {
     //   },
     // });
     const { data } = await api("/projects");
-    // console.log(data);
+    console.log("getProjects - data:", data);
 
     const response = dashboardProjectSchema.safeParse(data);
     // console.log(response);
