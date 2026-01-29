@@ -6,6 +6,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { toast } from "react-toastify";
 import { useAuth } from "@/hooks/useAuth";
+import { isManager } from "@/utils/policies";
 
 export default function DashBoardView() {
   const { data: user, isLoading: authLoading } = useAuth();
@@ -84,7 +85,8 @@ export default function DashBoardView() {
                 <div className="flex min-w-0 gap-x-4">
                   <div className="min-w-0 flex-auto space-y-2">
                     <div className="mb-2">
-                      {project.manager === user.user._id ? (
+                      {/* {project.manager === user.user._id ? ( */}
+                      {isManager(project.manager, user.user._id) ? (
                         <p className="font-bold text-xs uppercase bg-indigo-50 text-indigo-500 border-2 border-indigo-500 rounded-lg inline-block py-1 px-5">Manager</p>
                       ) : (
                         <p className="font-bold text-xs uppercase bg-green-50 text-green-500 border-2 border-green-500 rounded-lg inline-block py-1 px-5">Colaborador</p>
@@ -133,7 +135,8 @@ export default function DashBoardView() {
                           </Link>
                         </Menu.Item>
 
-                        {project.manager === user.user._id && (
+                        {/* {project.manager === user.user._id && ( */}
+                        {isManager(project.manager, user.user._id) && (
                           <>
                             <Menu.Item>
                               <Link
