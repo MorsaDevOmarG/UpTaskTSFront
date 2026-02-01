@@ -46,7 +46,7 @@ export async function getTaskById({
 
     const response = taskSchema.safeParse(data);
     // console.log(response.data);
-    console.log(response);
+    // console.log(response);
 
     if (response.success) {
       return response.data;

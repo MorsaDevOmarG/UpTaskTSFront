@@ -17,7 +17,7 @@ export default function AddNoteForm() {
     content: "",
   };
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: initialValues,
   });
 
@@ -35,6 +35,8 @@ export default function AddNoteForm() {
     console.log(formData, projectId, taskId);
 
     mutate({ projectId, taskId, formData });
+
+    reset();
   };
 
   return (
