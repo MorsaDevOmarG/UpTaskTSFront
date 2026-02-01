@@ -30,6 +30,7 @@ export default function AddNoteForm() {
     },
     onSuccess: (data) => {
       toast.success(data);
+      
       queryClient.invalidateQueries({
         queryKey: ["task", taskId],
       });
