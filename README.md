@@ -10,6 +10,26 @@
 - TailwindCSS
   - **_npm i -D tailwindcss@3 postcss autoprefixer_**
   - **_npx tailwindcss init -p_**
+  - Esto  es para los estilos y clases de **TAILWDINCSS**
+    - **_npm i @tailwindcss/forms_**
+    - Es necesario agregar configuracíón en el archivo:
+      - **tailwindcss.config.js**
+      - El apartado de: _plugins_:
+        - ```
+          /** @type {import('tailwindcss').Config} */
+          export default {
+            content: [
+              "./index.html",
+              "./src/**/*.{js,ts,jsx,tsx}"
+            ],
+            theme: {
+              extend: {},
+            },
+            plugins: [
+              require('@tailwindcss/forms')
+            ],
+          }
+        ```
 - React Router DOM
   - **_npm i react-router-dom_**
 - **IMPORT** de archivos
