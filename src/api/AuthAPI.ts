@@ -1,6 +1,7 @@
 import { isAxiosError } from "axios";
 import {
   userSchema,
+  type CheckPasswordForm,
   type ConfirmToken,
   type ForgotPasswordForm,
   type NewPasswordForm,
@@ -57,7 +58,7 @@ export async function authenticateUser(formData: UserLoginForm) {
     const { data } = await api.post<string>(url, formData);
     // console.log(data);
 
-    localStorage.setItem('AUTH_TOKEN', data);
+    localStorage.setItem("AUTH_TOKEN", data);
 
     return data;
   } catch (error) {
@@ -98,7 +99,7 @@ export async function updatePasswordWithToken({
   token,
 }: {
   formData: NewPasswordForm;
-  token: ConfirmToken['token'];
+  token: ConfirmToken["token"];
 }) {
   try {
     const url = `/auth/update-password/${token}`;
@@ -122,6 +123,20 @@ export async function getUser() {
     // if (response.success) {
     //   return response.data;
     // }
+
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function checkPassword(formData: CheckPasswordForm) {
+  try {
+    const url = "/auth/check-password";
+
+    const { data } = await api.post<string>(url, formData);
 
     return data;
   } catch (error) {
