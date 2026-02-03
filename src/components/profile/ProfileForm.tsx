@@ -1,20 +1,53 @@
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../ErrorMessage";
 import type { User, UserProfileForm } from "@/types/index";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateProfile } from "@/api/ProfileAPI";
+import { toast } from "react-toastify";
 
 type ProfileFormProps = {
   data: User;
-}
+  // data: { user: User } | undefined; // porque tu data viene con user
+};
 
 export default function ProfileForm({ data }: ProfileFormProps) {
+  // if (!data?.user) return null; // espera que user exista
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserProfileForm>({ defaultValues: data });
+  } = useForm<UserProfileForm>({
+    // defaultValues: data
+    defaultValues: {
+      name: data.user.name,
+      email: data.user.email,
+    },
+  });
   // console.log(data);
 
-  const handleEditProfile = (formData: UserProfileForm) => {};
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: updateProfile,
+    onError: (error) => {
+      console.log(error);
+      toast.error(error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data);
+
+      queryClient.invalidateQueries({
+        queryKey: ["user"],
+      });
+    },
+  });
+
+  const handleEditProfile = (formData: UserProfileForm) => {
+    // console.log(formData);
+
+    mutate(formData);
+  };
 
   return (
     <>
@@ -38,8 +71,8 @@ export default function ProfileForm({ data }: ProfileFormProps) {
               type="text"
               placeholder="Tu Nombre"
               className="w-full p-3  border border-gray-200"
-              // {...register("name", {
-              {...register("user.name", {
+              {...register("name", {
+              // {...register("user.name", {
                 required: "Nombre de usuario es obligatoro",
               })}
             />
@@ -55,8 +88,8 @@ export default function ProfileForm({ data }: ProfileFormProps) {
               type="email"
               placeholder="Tu Email"
               className="w-full p-3  border border-gray-200"
-              // {...register("email", {
-              {...register("user.email", {
+              {...register("email", {
+              // {...register("user.email", {
                 required: "EL e-mail es obligatorio",
                 pattern: {
                   value: /\S+@\S+\.\S+/,
