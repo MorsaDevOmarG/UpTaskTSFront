@@ -24,21 +24,21 @@ export default function DashBoardView() {
   // console.log(isError);
   // console.log(isLoading);
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
-    mutationFn: deleteProject,
-    onError: (error) => {
-      toast.error(error.message);
-    },
-    onSuccess: (data) => {
-      toast.success(data);
+  // const { mutate } = useMutation({
+  //   mutationFn: deleteProject,
+  //   onError: (error) => {
+  //     toast.error(error.message);
+  //   },
+  //   onSuccess: (data) => {
+  //     toast.success(data);
 
-      queryClient.invalidateQueries({
-        queryKey: ["projects"],
-      });
-    },
-  });
+  //     queryClient.invalidateQueries({
+  //       queryKey: ["projects"],
+  //     });
+  //   },
+  // });
 
   if (isLoading && authLoading) {
     return "Cargando...";
