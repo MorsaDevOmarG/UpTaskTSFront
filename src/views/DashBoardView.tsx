@@ -1,16 +1,19 @@
 import { deleteProject, getProjects } from "@/api/ProjectAPI";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Link, data } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { toast } from "react-toastify";
 import { useAuth } from "@/hooks/useAuth";
 import { isManager } from "@/utils/policies";
+import DeleteProjectModal from "@/components/projects/DeleteProjectModal";
 
 export default function DashBoardView() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const { data: user, isLoading: authLoading } = useAuth();
-  console.log("Dash", user);
+  // console.log("Dash", user);
 
   // El queryKey, debe ser único
   const { data, isLoading } = useQuery({
@@ -87,9 +90,13 @@ export default function DashBoardView() {
                     <div className="mb-2">
                       {/* {project.manager === user.user._id ? ( */}
                       {isManager(project.manager, user.user._id) ? (
-                        <p className="font-bold text-xs uppercase bg-indigo-50 text-indigo-500 border-2 border-indigo-500 rounded-lg inline-block py-1 px-5">Manager</p>
+                        <p className="font-bold text-xs uppercase bg-indigo-50 text-indigo-500 border-2 border-indigo-500 rounded-lg inline-block py-1 px-5">
+                          Manager
+                        </p>
                       ) : (
-                        <p className="font-bold text-xs uppercase bg-green-50 text-green-500 border-2 border-green-500 rounded-lg inline-block py-1 px-5">Colaborador</p>
+                        <p className="font-bold text-xs uppercase bg-green-50 text-green-500 border-2 border-green-500 rounded-lg inline-block py-1 px-5">
+                          Colaborador
+                        </p>
                       )}
                     </div>
 
@@ -150,7 +157,13 @@ export default function DashBoardView() {
                               <button
                                 type="button"
                                 className="block px-3 py-1 text-sm leading-6 text-red-500"
-                                onClick={() => mutate(project._id)}
+                                // onClick={() => mutate(project._id)}
+                                onClick={() =>
+                                  navigate(
+                                    location.pathname +
+                                      `?deleteProject=${project._id}`,
+                                  )
+                                }
                               >
                                 Eliminar Proyecto
                               </button>
@@ -175,6 +188,8 @@ export default function DashBoardView() {
             </Link>
           </p>
         )}
+
+        <DeleteProjectModal />
       </>
     );
 }
