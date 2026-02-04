@@ -1,6 +1,7 @@
 import type { Task } from "@/types/index";
 import TaskCard from "./TaskCard";
 import { statusTranslation } from "@/locales/es";
+import DropTask from "./DropTask";
 
 type TaskListProps = {
   tasks: Task[];
@@ -60,13 +61,17 @@ export default function TaskList({ tasks, cantEdit }: TaskListProps) {
               {statusTranslation[status]}
             </h3>
 
+            <DropTask />
+
             <ul className="mt-5 space-y-5">
               {tasks.length === 0 ? (
                 <li className="text-gray-500 text-center pt-3">
                   No Hay tareas
                 </li>
               ) : (
-                tasks.map((task) => <TaskCard key={task._id} task={task} cantEdit={cantEdit} />)
+                tasks.map((task) => (
+                  <TaskCard key={task._id} task={task} cantEdit={cantEdit} />
+                ))
               )}
             </ul>
           </div>

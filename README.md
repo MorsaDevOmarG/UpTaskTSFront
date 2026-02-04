@@ -10,7 +10,7 @@
 - TailwindCSS
   - **_npm i -D tailwindcss@3 postcss autoprefixer_**
   - **_npx tailwindcss init -p_**
-  - Esto  es para los estilos y clases de **TAILWDINCSS**
+  - Esto es para los estilos y clases de **TAILWDINCSS**
     - **_npm i @tailwindcss/forms_**
     - Es necesario agregar configuracíón en el archivo:
       - **tailwindcss.config.js**
@@ -29,6 +29,9 @@
               require('@tailwindcss/forms')
             ],
           }
+          ```
+        ```
+
         ```
 - React Router DOM
   - **_npm i react-router-dom_**
@@ -51,7 +54,12 @@
             },
           },
         });
+        ```
+
       ```
+
+      ```
+
     - **tsconfig.app.json**
       - ```
         {
@@ -88,10 +96,16 @@
           },
           "include": ["src"]
         }
+        ```
+
       ```
+
+      ```
+
   - Con estas configuraciones, los **import** se mandarán a llamar de la siguiente manera:
     - Antes de la configuración: _import Logo from "../components/Logo";_
     - Después de la configuración: _import Logo from "@/components/Logo";_
+
 - Menú Hamburguesa:
   - _https://headlessui.com/_
   - **_npm i @headlessui/react @heroicons/react_**
@@ -117,6 +131,8 @@
 - TOKENS
   - **_npm i @chakra-ui/pin-input_**
   - Es para poner los recuadros e ingresar los digítos del PIN
+- Drag & Drop
+  - **_npm i @dnd-kit/core_**
 
 ### REACT QUERY
 
@@ -140,46 +156,45 @@
 - La autenticación nos permitirá identificar a nuestros usuarios y darles ciertos accesos a su información.
 
   ## PRINCIPIOS
-    - Un usuario se puede autenticar con algo que él recuerda (Email y Password).
-    - Se puede autenticar con un dispositivo físico (Mensaje SMS o alerta).
-    - Se puede autenticar con algo físico (Huella Digital, Voz o Cara).
+  - Un usuario se puede autenticar con algo que él recuerda (Email y Password).
+  - Se puede autenticar con un dispositivo físico (Mensaje SMS o alerta).
+  - Se puede autenticar con algo físico (Huella Digital, Voz o Cara).
 
   ### ALGORITMO PARA CREAR CUENTA
-    - Los usuarios deberán ser únicos, usualmente para crear una cuenta se pide el e-mail del usuario.
-    - Los _password_ siempre deben estar **hasheados**.
-    - Una buena forma de evitar llenarte de usuarios es enviar un enlace de verificación al e-mail y entonces el usuario deberá realizar alguna acción (también posible con tarjeta de crédito o número celular).
-    - Una vez que el usuario crea su cuenta y la confirma, puede usar la app.
+  - Los usuarios deberán ser únicos, usualmente para crear una cuenta se pide el e-mail del usuario.
+  - Los _password_ siempre deben estar **hasheados**.
+  - Una buena forma de evitar llenarte de usuarios es enviar un enlace de verificación al e-mail y entonces el usuario deberá realizar alguna acción (también posible con tarjeta de crédito o número celular).
+  - Una vez que el usuario crea su cuenta y la confirma, puede usar la app.
 
   ### ALGORITMO PARA INICIAR SESIÓN
-    - La primer comprobación que debemos realizar es saber si el usuario existe o no.
-    - La segunda es revisar si su cuenta ya ha sido confirmada.
-    - La última es revisar si el _password_ es correcto, en caso de que si lo sea, el usuario es autenticado.
+  - La primer comprobación que debemos realizar es saber si el usuario existe o no.
+  - La segunda es revisar si su cuenta ya ha sido confirmada.
+  - La última es revisar si el _password_ es correcto, en caso de que si lo sea, el usuario es autenticado.
 
   ### ALGORITMO PARA REESTABLECER PASSWORD
-    - La primer comprobación que debemos realizar es saber si el usuario existe o no.
-    - Si el usuario existe se el envía un _Token_ que expira en 15 minutos.
-    - El _Token_ es enviado vía e-mail y el usuario deberá visitar un enlace e ingresar ese _token_; si el _token_ es válido le permitimos reestablecer su _password_.
+  - La primer comprobación que debemos realizar es saber si el usuario existe o no.
+  - Si el usuario existe se el envía un _Token_ que expira en 15 minutos.
+  - El _Token_ es enviado vía e-mail y el usuario deberá visitar un enlace e ingresar ese _token_; si el _token_ es válido le permitimos reestablecer su _password_.
 
 ## JSON WEB TOKEN
 
-  - **JWT** es un estándar abierto que define un formato compacto y seguro para transmitir información entre dos partes de manera segura como un objeto _JSON_.
-  - ### VENTAJAS
-
-    - **SEGURIDAD**
-      - Utiliza algoritmos de firma digital para asegurar que los datos no han sido alterados durante la transmisión.
-      - Esto garantiza la integridad de la información y permite a las partes confiar en su válidez.
-    - **AUTENTICACIÓN Y AUTORIZACIÓN**
-      - Se utiliza comúnmente para autenticar usuarios y permitirles acceder a recursos protegidos.
-      - Una vez que un usuario ha sido autenticado correctamente, se le proporciona un _JWT_ que contiene información sobre sus permisos y roles.
-      - El servidor puede verificar la válidez del _token_ y autorizar o reestringir el acceso.
-    - **TRANSFERENCIA EFICIENTE DE DATOS**
-      - _JWT_ es un formato compacto que se puede transmitir fácilmente a través de diferentes medios, como encabezados: _HTTP, URL_ o incluso en el cuerpo de una solicitud _HTTP_.
-      - Esto lo hace adecuado para su uso en aplicaciones _Web_ y servicios de _API_.
-    - **STATELESS (sin estado)**
-      - Los _JWT_ son "sin estado", lo que significa que la información necesaria para autenticar y autorizar a un usuario se encuentre directamente en el _token_.
-      - Esto elimina la necesidad de almacenar información de sesión en el servidor, lo que facilita la escalabilidad de las aplicaciones distribuidas.
-      - Proporcionan un mecanismo seguro y eficiente para transmitir información entre dos partes, autenticar usuarios y autorizar el acceso a recursos protegidos en aplicaciones _web_ y servicios _API_.
-      - Su naturaleza compacta, seguridad y facilidad de uso lo convierten en una opción popular para la implementación de sistemas de autenticación y autorización.
+- **JWT** es un estándar abierto que define un formato compacto y seguro para transmitir información entre dos partes de manera segura como un objeto _JSON_.
+- ### VENTAJAS
+  - **SEGURIDAD**
+    - Utiliza algoritmos de firma digital para asegurar que los datos no han sido alterados durante la transmisión.
+    - Esto garantiza la integridad de la información y permite a las partes confiar en su válidez.
+  - **AUTENTICACIÓN Y AUTORIZACIÓN**
+    - Se utiliza comúnmente para autenticar usuarios y permitirles acceder a recursos protegidos.
+    - Una vez que un usuario ha sido autenticado correctamente, se le proporciona un _JWT_ que contiene información sobre sus permisos y roles.
+    - El servidor puede verificar la válidez del _token_ y autorizar o reestringir el acceso.
+  - **TRANSFERENCIA EFICIENTE DE DATOS**
+    - _JWT_ es un formato compacto que se puede transmitir fácilmente a través de diferentes medios, como encabezados: _HTTP, URL_ o incluso en el cuerpo de una solicitud _HTTP_.
+    - Esto lo hace adecuado para su uso en aplicaciones _Web_ y servicios de _API_.
+  - **STATELESS (sin estado)**
+    - Los _JWT_ son "sin estado", lo que significa que la información necesaria para autenticar y autorizar a un usuario se encuentre directamente en el _token_.
+    - Esto elimina la necesidad de almacenar información de sesión en el servidor, lo que facilita la escalabilidad de las aplicaciones distribuidas.
+    - Proporcionan un mecanismo seguro y eficiente para transmitir información entre dos partes, autenticar usuarios y autorizar el acceso a recursos protegidos en aplicaciones _web_ y servicios _API_.
+    - Su naturaleza compacta, seguridad y facilidad de uso lo convierten en una opción popular para la implementación de sistemas de autenticación y autorización.
 
 ### COOKIES & LOCALSTORAGE
 
@@ -202,5 +217,3 @@
     - **Sobrecarga de red**: Las _Cookies_ se envían con cada solicitud _HTTP_, lo que puede aumentar el tráfico de red si los _tokens_ son grandes.
     - **Capacidad limitada**: Al igual que _LocalStorage_, las _Cookies_ también tienen un tamaño máximo de almacenamiento por dominio (generalmente 4KB por _Cookie_).
     - **Menos persistencia**: Las _Cookies_ pueden ser eliminadas por el usuario o expirar automáticamente después de un período de tiempo, lo que puede requerir una renovación periódica de los _tokens_.
-
-
