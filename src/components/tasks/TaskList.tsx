@@ -2,7 +2,7 @@ import type { Task } from "@/types/index";
 import TaskCard from "./TaskCard";
 import { statusTranslation } from "@/locales/es";
 import DropTask from "./DropTask";
-import { DndContext, useDraggable } from "@dnd-kit/core";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
 
 type TaskListProps = {
   tasks: Task[];
@@ -48,12 +48,24 @@ export default function TaskList({ tasks, cantEdit }: TaskListProps) {
   }, initialStatusGroups);
   // console.log(groupedTasks);
 
+  const handleDragEnd = (e: DragEndEvent) => {
+    console.log("Soltaste...", e);
+
+    const { over, active } = e;
+
+    if (over && over.id) {
+      console.log("Valido");
+    } else {
+      console.log("Invalido");
+    }
+  };
+
   return (
     <>
       <h2 className="text-5xl font-black my-10">Tareas</h2>
 
       <div className="flex gap-5 overflow-x-scroll 2xl:overflow-auto pb-32">
-        <DndContext>
+        <DndContext onDragEnd={handleDragEnd}>
           {Object.entries(groupedTasks).map(([status, tasks]) => (
             <div key={status} className="min-w-[300px] 2xl:min-w-0 2xl:w-1/5">
               {/* <h3>{status}</h3> */}
@@ -63,7 +75,7 @@ export default function TaskList({ tasks, cantEdit }: TaskListProps) {
                 {statusTranslation[status]}
               </h3>
 
-              <DropTask />
+              <DropTask status={status} />
 
               <ul className="mt-5 space-y-5">
                 {tasks.length === 0 ? (
