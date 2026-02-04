@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Fragment } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDraggable } from "@dnd-kit/core";
 
 type TaskCardProps = {
   task: Task;
@@ -13,6 +14,10 @@ type TaskCardProps = {
 };
 
 export default function TaskCard({ task, cantEdit }: TaskCardProps) {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: task._id,
+  });
+
   const navigate = useNavigate();
 
   // Obtener el ID desde la URL
@@ -33,12 +38,20 @@ export default function TaskCard({ task, cantEdit }: TaskCardProps) {
       queryClient.invalidateQueries({
         queryKey: ["project", projectId],
       });
-    }
+    },
   });
+
+  const style = transform ? {} : undefined;
 
   return (
     <li className="p-5 bg-white border-slate-300 flex justify-between gap-3">
-      <div className="min-w-0 flex flex-col gap-y-4">
+      <div
+        className="min-w-0 flex flex-col gap-y-4"
+        {...listeners}
+        {...attributes}
+        ref={setNodeRef}
+        style={style}
+      >
         <button
           type="submit"
           className="text-xl font-bold text-slate-600 text-left"
