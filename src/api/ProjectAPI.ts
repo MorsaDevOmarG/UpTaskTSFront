@@ -1,6 +1,7 @@
 import api from "@/lib/axios";
 import {
   dashboardProjectSchema,
+  editProjectSchema,
   type Project,
   type ProjectFormData,
 } from "@/types/index";
@@ -26,7 +27,7 @@ export async function createProject(formData: ProjectFormData) {
 export async function getProjects() {
   // const token = localStorage.getItem("AUTH_TOKEN");
   // console.log("Token en ProjectAPI:", token);
-  
+
   try {
     // const { data } = await api("/projects", {
     //   headers: {
@@ -51,12 +52,17 @@ export async function getProjects() {
   }
 }
 
-export async function getProjectById(id: Project['_id']) {
+export async function getProjectById(id: Project["_id"]) {
   try {
     const { data } = await api(`/projects/${id}`);
     // console.log("getProjectById - data:", data);
+    const response = editProjectSchema.safeParse(data);
 
-    return data;
+    if (response.success) {
+      return response.data;
+    }
+
+    // return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
       throw new Error(error.response.data.error);
@@ -65,11 +71,11 @@ export async function getProjectById(id: Project['_id']) {
 }
 
 type ProjectAPIType = {
-  formData: ProjectFormData,
-  projectId: Project['_id']
+  formData: ProjectFormData;
+  projectId: Project["_id"];
 };
 
-export async function updateProject({formData, projectId} : ProjectAPIType) {
+export async function updateProject({ formData, projectId }: ProjectAPIType) {
   try {
     const { data } = await api.put<string>(`/projects/${projectId}`, formData);
 
