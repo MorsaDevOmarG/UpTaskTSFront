@@ -17,6 +17,7 @@ import ProjectTeamView from "./views/projects/ProjectTeamView";
 import ProfileView from "./views/profile/ProfileView";
 import ChangePasswordView from "./views/profile/ChangePasswordView";
 import ProfileLayout from "./layouts/ProfileLayout";
+import NotFound from "./views/404/NotFound";
 
 export default function Router() {
   return (
@@ -26,9 +27,15 @@ export default function Router() {
           <Route path="/" element={<DashBoardView />} index />
           <Route path="/projects/create" element={<CreateProjectView />} />
           <Route path="/projects/:projectId" element={<ProjectDetailsView />} />
-          <Route path="/projects/:projectId/edit" element={<EditProjectView />} />
-          <Route path="/projects/:projectId/team" element={<ProjectTeamView />} />
-          
+          <Route
+            path="/projects/:projectId/edit"
+            element={<EditProjectView />}
+          />
+          <Route
+            path="/projects/:projectId/team"
+            element={<ProjectTeamView />}
+          />
+
           <Route element={<ProfileLayout />}>
             <Route path="/profile" element={<ProfileView />} />
             <Route path="/profile/password" element={<ChangePasswordView />} />
@@ -38,12 +45,24 @@ export default function Router() {
         <Route element={<AuthLayout />}>
           <Route path="/auth/login" element={<LoginView />} />
           <Route path="/auth/register" element={<RegisterView />} />
-          <Route path="/auth/confirm-account" element={<ConfirmAccountView />} />
+          <Route
+            path="/auth/confirm-account"
+            element={<ConfirmAccountView />}
+          />
           <Route path="/auth/request-code" element={<RequestNewCodeView />} />
-          <Route path="/auth/forgot-password" element={<ForgotPasswordView />} />
+          <Route
+            path="/auth/forgot-password"
+            element={<ForgotPasswordView />}
+          />
           <Route path="/auth/new-password" element={<NewPasswordView />} />
+        </Route>
+
+        <Route element={<AuthLayout />}>
+          {/* <Route path="/404" element={<NotFound />}></Route> */}
+          {/* El aterisco indica que sino se cumple ninguna de las vistas, va a caer en esta página */}
+          <Route path="*" element={<NotFound />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
-  )
-};
+  );
+}

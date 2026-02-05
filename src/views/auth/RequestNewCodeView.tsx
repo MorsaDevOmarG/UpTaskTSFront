@@ -1,6 +1,9 @@
 import { data, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { RequestConfirmationCodeForm, type RequestNewCodeView } from "../../types";
+import {
+  RequestConfirmationCodeForm,
+  type RequestNewCodeView,
+} from "../../types";
 import ErrorMessage from "@/components/ErrorMessage";
 import { useMutation } from "@tanstack/react-query";
 import { requestConfirmationCode } from "@/api/AuthAPI";
@@ -14,7 +17,7 @@ export default function RequestNewCodeView() {
   const {
     register,
     handleSubmit,
-    reset,
+    // reset,
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
 
@@ -25,7 +28,7 @@ export default function RequestNewCodeView() {
     },
     onSuccess: (data) => {
       toast.success(data);
-    }
+    },
   });
 
   const handleRequestCode = (formData: RequestNewCodeView) => {
