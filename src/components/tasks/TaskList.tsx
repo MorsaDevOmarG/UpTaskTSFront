@@ -81,17 +81,35 @@ export default function TaskList({ tasks, cantEdit }: TaskListProps) {
 
     if (over && over.id) {
       // console.log("Valido", active.id);
-
-      const taskId = active.id.toString();
-
       // console.log(over.id);
 
+      const taskId = active.id.toString();
       const status = over.id as TaskStatus;
 
       mutate({
         projectId,
         taskId,
         status,
+      });
+
+      queryClient.setQueryData(["project", projectId], (prevData) => {
+        // console.log(prevData);
+
+        const updatedTaks = prevData.tasks.map((task: Task) => {
+          if (task._id === taskId) {
+            return {
+              ...task,
+              status,
+            };
+          }
+
+          return task;
+        });
+
+        return {
+          ...prevData,
+          tasks: updatedTaks,
+        };
       });
     }
   };
