@@ -1,4 +1,4 @@
-import { getProjectById } from "@/api/ProjectAPI";
+import { getFullProject, getProjectById } from "@/api/ProjectAPI";
 // import EditProjectForm from "@/components/projects/EditProjectForm";
 import AddTaskModal from "@/components/tasks/AddTaskModal";
 import EditTaskData from "@/components/tasks/EditTaskData";
@@ -11,7 +11,7 @@ import { useMemo } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
 export default function ProjectDetailsView() {
-  const {data: user, isLoading: authLoading} = useAuth();
+  const { data: user, isLoading: authLoading } = useAuth();
 
   const navigate = useNavigate();
 
@@ -22,7 +22,8 @@ export default function ProjectDetailsView() {
   const { data, isLoading, isError } = useQuery({
     // queryKey: ["editProject", projectId],
     queryKey: ["project", projectId],
-    queryFn: () => getProjectById(projectId),
+    // queryFn: () => getProjectById(projectId),
+    queryFn: () => getFullProject(projectId),
     retry: false,
   });
 
@@ -63,12 +64,8 @@ export default function ProjectDetailsView() {
             </Link>
           </nav>
         )}
-        
 
-        <TaskList
-          tasks={data.tasks}
-          cantEdit={canEdit}
-        />
+        <TaskList tasks={data.tasks} cantEdit={canEdit} />
 
         <AddTaskModal />
 

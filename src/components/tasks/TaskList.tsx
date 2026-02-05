@@ -1,4 +1,4 @@
-import type { Task, TaskStatus } from "@/types/index";
+import type { Project, Task, TaskProject, TaskStatus } from "@/types/index";
 import TaskCard from "./TaskCard";
 import { statusTranslation } from "@/locales/es";
 import DropTask from "./DropTask";
@@ -9,12 +9,14 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
 type TaskListProps = {
-  tasks: Task[];
+  // tasks: Task[];
+  tasks: TaskProject[];
   cantEdit: boolean;
 };
 
 type GroupedTasks = {
-  [key: string]: Task[];
+  // [key: string]: Task[];
+  [key: string]: TaskProject[];
 };
 
 const initialStatusGroups: GroupedTasks = {
@@ -92,10 +94,11 @@ export default function TaskList({ tasks, cantEdit }: TaskListProps) {
         status,
       });
 
-      queryClient.setQueryData(["project", projectId], (prevData) => {
+      queryClient.setQueryData(["project", projectId], (prevData: Project) => {
         // console.log(prevData);
 
-        const updatedTaks = prevData.tasks.map((task: Task) => {
+        // const updatedTaks = prevData.tasks.map((task: Task) => {
+        const updatedTaks = prevData.tasks.map((task) => {
           if (task._id === taskId) {
             return {
               ...task,
